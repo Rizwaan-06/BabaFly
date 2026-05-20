@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Mobile Responsive Overrides ─────────────── */
+@media (max-width: 768px) {
+  section {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  /* Force 1-column grids on mobile */
+  div[style*="gridTemplateColumns: repeat(3"],
+  div[style*="gridTemplateColumns: repeat(2"],
+  div[style*="gridTemplateColumns: 1fr 360px"],
+  div[style*="gridTemplateColumns: 1fr 380px"],
+  div[style*="gridTemplateColumns: 1fr 1fr"],
+  div[style*="gridTemplateColumns: repeat(5"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Checkout & cart layout */
+  div[style*="gridTemplateColumns: 1fr 360px"] > div:last-child,
+  div[style*="gridTemplateColumns: 1fr 380px"] > div:last-child {
+    position: static !important;
+  }
+
+  /* Hide left image panel on login/register */
+  div[style*="width: 46%"] {
+    display: none !important;
+  }
+
+  /* Reduce hero height */
+  section[id="hero"] {
+    min-height: 500px !important;
+    height: 80vh !important;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 28px !important;
+  }
+  h2 {
+    font-size: 24px !important;
+  }
+}
