@@ -192,8 +192,7 @@ To deploy your own instance:
 
 **Mohammed Rizwaan**
 - 🎓 Frontend Intern at **InfoBharat Interns**
-- 🔗 LinkedIn: _(Add your LinkedIn profile URL)_
-- 🐙 GitHub: _(Add your GitHub profile URL)_
+- 🔗 LinkedIn: _(www.linkedin.com/in/mohammed-rizwaan-ahmed-)_
 
 ---
 
