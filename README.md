@@ -18,7 +18,7 @@
 
 ## 🚀 Live Demo
 
-> 🔗 **Deployment Link:** _(Add your Vercel / Netlify deployment URL here)_
+> 🔗 **Deployment Link:** _(https://baba-fly.vercel.app/)_
 
 ---
 
