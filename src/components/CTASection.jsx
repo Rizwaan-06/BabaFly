@@ -74,6 +74,7 @@ export default function CTASection() {
           {!submitted ? (
             <form
               onSubmit={handleSubmit}
+              className="cta-form"
               style={{
                 display: 'flex',
                 gap: 0,

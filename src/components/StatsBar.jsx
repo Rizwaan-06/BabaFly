@@ -43,15 +43,7 @@ export default function StatsBar() {
         padding: '52px 40px',
       }}
     >
-      <div
-        style={{
-          maxWidth: 1100,
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: 0,
-        }}
-      >
+      <div className="grid-4col" style={{ maxWidth: 1100, margin: '0 auto' }}>
         {STATS.map((stat, i) => (
           <motion.div
             key={stat.label}

@@ -10,12 +10,7 @@ export default function ExperienceSection() {
       style={{ background: '#050505', padding: '100px 40px' }}
     >
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 60,
-          alignItems: 'center',
-        }}>
+        <div className="grid-experience">
           {/* Left — Image */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}

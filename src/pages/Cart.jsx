@@ -30,11 +30,12 @@ export default function Cart() {
         <h1 style={{ fontSize: 'clamp(28px,4vw,44px)', fontWeight: 900, color: '#fff', letterSpacing: '-0.03em', marginBottom: 8 }}>Charter Selection</h1>
         <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 40 }}>{items.length} aircraft in your selection</p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: 32 }}>
+        <div className="grid-cart">
           {/* Items */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {items.map(item => (
               <motion.div key={item.id} layout initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+                className="cart-item"
                 style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: '20px 22px', display: 'flex', gap: 20, alignItems: 'center' }}>
                 <img src={item.image} alt={item.name} style={{ width: 110, height: 76, objectFit: 'cover', borderRadius: 10, flexShrink: 0 }} />
                 <div style={{ flex: 1 }}>

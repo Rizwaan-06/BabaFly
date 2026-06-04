@@ -30,123 +30,170 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => { setMenuOpen(false); }, [location]);
+
   const handleLogout = () => {
     dispatch(logout());
     toast.success('Signed out successfully.');
     navigate('/');
     setDropOpen(false);
+    setMenuOpen(false);
   };
 
   const isHome = location.pathname === '/';
 
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '0 40px', height: 64,
-        background: scrolled || !isHome ? 'rgba(8,8,8,0.95)' : 'rgba(0,0,0,0.18)',
-        backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)',
-        borderBottom: scrolled || !isHome ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
-        transition: 'background 0.4s, border-color 0.4s',
-      }}
-    >
-      {/* Logo */}
-      <Link to="/" style={{ fontFamily: "'Inter',sans-serif", fontWeight: 800, fontSize: 17, letterSpacing: '0.12em', color: '#fff', textDecoration: 'none', textTransform: 'uppercase' }}>
-        BabaFly
-      </Link>
-
-      {/* Nav links — desktop */}
-      <ul style={{ display: 'flex', gap: 36, listStyle: 'none', margin: 0, padding: 0 }}>
-        {NAV_LINKS.map(({ label, href }) => (
-          <li key={label}>
-            <Link to={href}
-              style={{ fontFamily: "'Inter',sans-serif", fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,0.8)', textDecoration: 'none', transition: 'color 0.2s' }}
-              onMouseEnter={e => e.target.style.color = '#fff'}
-              onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.8)'}
-            >{label}</Link>
-          </li>
-        ))}
-      </ul>
-
-      {/* Icon actions */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-        {/* Cart */}
-        <Link to="/cart" style={{ position: 'relative', display: 'flex', color: 'rgba(255,255,255,0.8)', transition: 'color 0.2s' }}
-          onMouseEnter={e => e.currentTarget.style.color = '#fff'}
-          onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.8)'}>
-          <ShoppingCart size={19} strokeWidth={1.8} />
-          <AnimatePresence>
-            {cartCount > 0 && (
-              <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
-                style={{ position: 'absolute', top: -6, right: -7, background: '#fff', color: '#000', fontSize: 9, fontWeight: 800, width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}>
-                {cartCount}
-              </motion.span>
-            )}
-          </AnimatePresence>
+    <>
+      <motion.nav
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        style={{
+          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          padding: '0 40px', height: 64,
+          background: scrolled || !isHome ? 'rgba(8,8,8,0.95)' : 'rgba(0,0,0,0.18)',
+          backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)',
+          borderBottom: scrolled || !isHome ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
+          transition: 'background 0.4s, border-color 0.4s',
+        }}
+      >
+        {/* Logo */}
+        <Link to="/" style={{ fontFamily: "'Inter',sans-serif", fontWeight: 800, fontSize: 17, letterSpacing: '0.12em', color: '#fff', textDecoration: 'none', textTransform: 'uppercase' }}>
+          BabaFly
         </Link>
 
-        {/* Wishlist */}
-        <button style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.8)', display: 'flex', padding: 0, transition: 'color 0.2s' }}
-          onMouseEnter={e => e.currentTarget.style.color = '#fff'}
-          onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.8)'}>
-          <Heart size={19} strokeWidth={1.8} />
-        </button>
+        {/* Nav links — desktop only (hidden on mobile via CSS) */}
+        <ul className="nav-links">
+          {NAV_LINKS.map(({ label, href }) => (
+            <li key={label}>
+              <Link to={href}
+                style={{ fontFamily: "'Inter',sans-serif", fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,0.8)', textDecoration: 'none', transition: 'color 0.2s' }}
+                onMouseEnter={e => e.target.style.color = '#fff'}
+                onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.8)'}
+              >{label}</Link>
+            </li>
+          ))}
+        </ul>
 
-        {/* User */}
-        <div style={{ position: 'relative' }}>
-          <button onClick={() => setDropOpen(v => !v)}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.8)', display: 'flex', padding: 0, transition: 'color 0.2s' }}
+        {/* Icon actions */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          {/* Cart */}
+          <Link to="/cart" style={{ position: 'relative', display: 'flex', color: 'rgba(255,255,255,0.8)', transition: 'color 0.2s' }}
             onMouseEnter={e => e.currentTarget.style.color = '#fff'}
             onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.8)'}>
-            <User size={19} strokeWidth={1.8} />
+            <ShoppingCart size={19} strokeWidth={1.8} />
+            <AnimatePresence>
+              {cartCount > 0 && (
+                <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
+                  style={{ position: 'absolute', top: -6, right: -7, background: '#fff', color: '#000', fontSize: 9, fontWeight: 800, width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}>
+                  {cartCount}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </Link>
+
+          {/* Wishlist — desktop only */}
+          <button style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.8)', display: 'flex', padding: 0, transition: 'color 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#fff'}
+            onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.8)'}>
+            <Heart size={19} strokeWidth={1.8} />
           </button>
 
-          <AnimatePresence>
-            {dropOpen && (
-              <motion.div initial={{ opacity: 0, y: 8, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.95 }} transition={{ duration: 0.15 }}
-                style={{ position: 'absolute', top: 36, right: 0, background: '#111', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 14, overflow: 'hidden', minWidth: 180, boxShadow: '0 16px 40px rgba(0,0,0,0.6)' }}>
-                {isAuthenticated ? (
-                  <>
-                    <div style={{ padding: '14px 16px', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-                      <div style={{ fontSize: 13, fontWeight: 700, color: '#fff' }}>{user?.name ?? 'Traveller'}</div>
-                      <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>{user?.email ?? ''}</div>
-                    </div>
-                    {[{ label: 'My Bookings', to: '/orders' }, { label: 'Cart', to: '/cart' }].map(({ label, to }) => (
-                      <Link key={to} to={to} onClick={() => setDropOpen(false)}
-                        style={{ display: 'block', padding: '12px 16px', fontSize: 13, color: 'rgba(255,255,255,0.7)', textDecoration: 'none', transition: 'background 0.15s' }}
-                        onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
+          {/* User */}
+          <div style={{ position: 'relative' }}>
+            <button onClick={() => setDropOpen(v => !v)}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.8)', display: 'flex', padding: 0, transition: 'color 0.2s' }}
+              onMouseEnter={e => e.currentTarget.style.color = '#fff'}
+              onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.8)'}>
+              <User size={19} strokeWidth={1.8} />
+            </button>
+
+            <AnimatePresence>
+              {dropOpen && (
+                <motion.div initial={{ opacity: 0, y: 8, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.95 }} transition={{ duration: 0.15 }}
+                  style={{ position: 'absolute', top: 36, right: 0, background: '#111', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 14, overflow: 'hidden', minWidth: 180, boxShadow: '0 16px 40px rgba(0,0,0,0.6)' }}>
+                  {isAuthenticated ? (
+                    <>
+                      <div style={{ padding: '14px 16px', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+                        <div style={{ fontSize: 13, fontWeight: 700, color: '#fff' }}>{user?.name ?? 'Traveller'}</div>
+                        <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>{user?.email ?? ''}</div>
+                      </div>
+                      {[{ label: 'My Bookings', to: '/orders' }, { label: 'Cart', to: '/cart' }].map(({ label, to }) => (
+                        <Link key={to} to={to} onClick={() => setDropOpen(false)}
+                          style={{ display: 'block', padding: '12px 16px', fontSize: 13, color: 'rgba(255,255,255,0.7)', textDecoration: 'none', transition: 'background 0.15s' }}
+                          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
+                          onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                          {label}
+                        </Link>
+                      ))}
+                      <button onClick={handleLogout}
+                        style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 8, padding: '12px 16px', fontSize: 13, color: '#f87171', background: 'none', border: 'none', cursor: 'pointer', borderTop: '1px solid rgba(255,255,255,0.07)', transition: 'background 0.15s', textAlign: 'left' }}
+                        onMouseEnter={e => e.currentTarget.style.background = 'rgba(248,113,113,0.08)'}
                         onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                        {label}
+                        <LogOut size={13} /> Sign Out
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/login" onClick={() => setDropOpen(false)}
+                        style={{ display: 'block', padding: '13px 16px', fontSize: 13, color: '#fff', textDecoration: 'none', fontWeight: 600, textAlign: 'center' }}>
+                        Sign In
                       </Link>
-                    ))}
-                    <button onClick={handleLogout}
-                      style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 8, padding: '12px 16px', fontSize: 13, color: '#f87171', background: 'none', border: 'none', cursor: 'pointer', borderTop: '1px solid rgba(255,255,255,0.07)', transition: 'background 0.15s', textAlign: 'left' }}
-                      onMouseEnter={e => e.currentTarget.style.background = 'rgba(248,113,113,0.08)'}
-                      onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                      <LogOut size={13} /> Sign Out
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <Link to="/login" onClick={() => setDropOpen(false)}
-                      style={{ display: 'block', padding: '13px 16px', fontSize: 13, color: '#fff', textDecoration: 'none', fontWeight: 600, textAlign: 'center' }}>
-                      Sign In
-                    </Link>
-                    <Link to="/register" onClick={() => setDropOpen(false)}
-                      style={{ display: 'block', padding: '13px 16px', fontSize: 13, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-                      Create Account
-                    </Link>
-                  </>
-                )}
-              </motion.div>
-            )}
-          </AnimatePresence>
+                      <Link to="/register" onClick={() => setDropOpen(false)}
+                        style={{ display: 'block', padding: '13px 16px', fontSize: 13, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                        Create Account
+                      </Link>
+                    </>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Hamburger — mobile only (shown via CSS) */}
+          <button
+            className="nav-hamburger"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            onClick={() => setMenuOpen(v => !v)}
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
-      </div>
-    </motion.nav>
+      </motion.nav>
+
+      {/* Mobile slide-down menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="mobile-menu"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {NAV_LINKS.map(({ label, href }) => (
+              <Link key={label} to={href} onClick={() => setMenuOpen(false)}>
+                {label}
+              </Link>
+            ))}
+            <div style={{ height: 1, background: 'rgba(255,255,255,0.06)', margin: '4px 0' }} />
+            {isAuthenticated ? (
+              <>
+                <Link to="/orders" onClick={() => setMenuOpen(false)}>My Bookings</Link>
+                <Link to="/cart" onClick={() => setMenuOpen(false)}>Cart {cartCount > 0 && `(${cartCount})`}</Link>
+                <button onClick={handleLogout} style={{ color: '#f87171' }}>Sign Out</button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" onClick={() => setMenuOpen(false)}>Sign In</Link>
+                <Link to="/register" onClick={() => setMenuOpen(false)}>Create Account</Link>
+              </>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

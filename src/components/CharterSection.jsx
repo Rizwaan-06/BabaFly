@@ -17,7 +17,7 @@ export default function CharterSection() {
           <div style={{ fontSize: 11, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.35)', fontFamily: "'Inter', sans-serif", fontWeight: 600, textTransform: 'uppercase', marginBottom: 14 }}>— How It Works</div>
           <h2 style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1.1 }}>Charter in Three<br />Simple Steps</h2>
         </motion.div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2, marginBottom: 64 }}>
+        <div className="grid-3col" style={{ gap: 2, marginBottom: 64 }}>
           {STEPS.map((step, i) => (
             <motion.div key={step.num} initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.65, delay: i * 0.13 }}
               style={{ padding: '48px 40px', background: i === 1 ? 'rgba(255,255,255,0.04)' : 'transparent', border: '1px solid', borderColor: i === 1 ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.05)', borderRadius: 20, position: 'relative' }}>

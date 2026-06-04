@@ -30,7 +30,7 @@ export default function HomepageCategories() {
           style={{ marginBottom: 64 }}>
           <div style={{ fontSize: 11, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', marginBottom: 14 }}>— Quick Search</div>
           <h2 style={{ fontSize: 'clamp(28px,3.5vw,40px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.03em', marginBottom: 20 }}>Find Your Aircraft</h2>
-          <form onSubmit={handleSearch} style={{ display: 'flex', gap: 0, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 50, padding: '6px 6px 6px 24px', maxWidth: 560 }}>
+          <form onSubmit={handleSearch} className="search-form" style={{ display: 'flex', gap: 0, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 50, padding: '6px 6px 6px 24px', maxWidth: 560 }}>
             <Search size={16} color="rgba(255,255,255,0.3)" style={{ flexShrink: 0, marginTop: 10 }} />
             <input value={q} onChange={e => setQ(e.target.value)} placeholder="Search jets, manufacturers, categories…"
               style={{ flex: 1, background: 'none', border: 'none', outline: 'none', color: '#fff', fontSize: 14, padding: '10px 14px', caretColor: '#fff' }} />
@@ -53,7 +53,7 @@ export default function HomepageCategories() {
               All Categories <ArrowRight size={14} />
             </Link>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 14 }}>
+          <div className="grid-5col">
             {CATEGORIES.map((cat, i) => {
               const Icon = CAT_ICONS[cat.id] || Plane;
               return (

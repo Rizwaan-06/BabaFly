@@ -18,46 +18,287 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Mobile Responsive Overrides ─────────────── */
+/* ── Keyframe for spinner ─────────────────────────── */
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ══════════════════════════════════════════════════
+   NAVBAR — mobile hamburger
+══════════════════════════════════════════════════ */
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255,255,255,0.85);
+  padding: 4px;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+/* ══════════════════════════════════════════════════
+   GRID HELPERS — used on each section's inner grid
+══════════════════════════════════════════════════ */
+.grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.grid-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.grid-4col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.grid-5col {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.grid-cart {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 32px;
+}
+
+.grid-experience {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.grid-footer {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.grid-checkout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 32px;
+}
+
+.grid-aircraft {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+/* ══════════════════════════════════════════════════
+   MOBILE ≤ 768 px
+══════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  section {
+
+  /* ── Navbar ── */
+  .nav-links {
+    display: none !important;
+  }
+
+  .nav-hamburger {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Reduce navbar side padding on mobile */
+  nav[style] {
     padding-left: 20px !important;
     padding-right: 20px !important;
   }
 
-  /* Force 1-column grids on mobile */
-  div[style*="gridTemplateColumns: repeat(3"],
-  div[style*="gridTemplateColumns: repeat(2"],
-  div[style*="gridTemplateColumns: 1fr 360px"],
-  div[style*="gridTemplateColumns: 1fr 380px"],
-  div[style*="gridTemplateColumns: 1fr 1fr"],
-  div[style*="gridTemplateColumns: repeat(5"] {
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: rgba(8,8,8,0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding: 20px 24px 28px;
+    gap: 4px;
+    z-index: 99;
+  }
+
+  .mobile-menu a,
+  .mobile-menu button {
+    display: block;
+    width: 100%;
+    padding: 14px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    cursor: pointer;
+    text-align: left;
+    letter-spacing: 0.01em;
+  }
+
+  .mobile-menu a:last-child,
+  .mobile-menu button:last-child {
+    border-bottom: none;
+  }
+
+  /* ── Sections padding ── */
+  section {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+  }
+
+  /* ── Grids → single column ── */
+  .grid-3col,
+  .grid-2col,
+  .grid-5col,
+  .grid-4col,
+  .grid-experience,
+  .grid-cart,
+  .grid-checkout,
+  .grid-footer,
+  .grid-aircraft {
     grid-template-columns: 1fr !important;
   }
 
-  /* Checkout & cart layout */
-  div[style*="gridTemplateColumns: 1fr 360px"] > div:last-child,
-  div[style*="gridTemplateColumns: 1fr 380px"] > div:last-child {
+  /* ── Stats bar: 2 columns on mobile ── */
+  .grid-4col {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+  }
+
+  /* Stat item borders on mobile */
+  .grid-4col > div {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 16px 0 !important;
+  }
+
+  /* ── Cart / Checkout sticky → static ── */
+  .grid-cart > div:last-child,
+  .grid-checkout > div:last-child {
     position: static !important;
   }
 
-  /* Hide left image panel on login/register */
+  /* ── Experience: image first ── */
+  .grid-experience {
+    gap: 40px !important;
+  }
+
+  /* ── Footer bottom row ── */
+  .footer-bottom {
+    flex-direction: column !important;
+    gap: 8px !important;
+    text-align: center !important;
+  }
+
+  /* ── Hero ── */
+  section#hero {
+    min-height: 500px !important;
+    height: 85vh !important;
+  }
+
+  /* ── CTA email form → stack ── */
+  .cta-form {
+    flex-direction: column !important;
+    border-radius: 16px !important;
+    padding: 16px !important;
+    align-items: stretch !important;
+  }
+
+  .cta-form input {
+    padding: 10px 0 !important;
+  }
+
+  .cta-form button {
+    width: 100% !important;
+    justify-content: center !important;
+    border-radius: 10px !important;
+  }
+
+  /* ── Checkout form inner grids ── */
+  div[style*="gridTemplateColumns: 1fr 1fr"],
+  div[style*="gridTemplateColumns: 1fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Login / Register image panel ── */
   div[style*="width: 46%"] {
     display: none !important;
   }
 
-  /* Reduce hero height */
-  section[id="hero"] {
-    min-height: 500px !important;
-    height: 80vh !important;
+  /* ── AircraftListing page padding ── */
+  .aircraft-listing-inner {
+    padding: 32px 16px !important;
+  }
+
+  /* ── Cart item layout ── */
+  .cart-item {
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
+
+  .cart-item img {
+    width: 100% !important;
+    height: 160px !important;
   }
 }
 
+/* ══════════════════════════════════════════════════
+   EXTRA SMALL ≤ 480 px
+══════════════════════════════════════════════════ */
 @media (max-width: 480px) {
-  h1 {
-    font-size: 28px !important;
+  h1 { font-size: 28px !important; }
+  h2 { font-size: 24px !important; }
+
+  section {
+    padding-top: 52px !important;
+    padding-bottom: 52px !important;
   }
-  h2 {
-    font-size: 24px !important;
+
+  .grid-4col {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Search bar form → stack on tiny screens */
+  .search-form {
+    flex-direction: column !important;
+    border-radius: 14px !important;
+    padding: 14px !important;
+    align-items: stretch !important;
+  }
+
+  .search-form button {
+    width: 100% !important;
+    justify-content: center !important;
+    border-radius: 10px !important;
+    margin-top: 4px !important;
   }
 }

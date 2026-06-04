@@ -24,13 +24,7 @@ export default function Footer() {
     >
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         {/* Top row */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1.6fr 1fr 1fr 1fr',
-          gap: 48,
-          paddingBottom: 60,
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
-        }}>
+        <div className="grid-footer">
           {/* Brand */}
           <div>
             <div style={{
@@ -115,7 +109,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom row */}
-        <div style={{
+        <div className="footer-bottom" style={{
           paddingTop: 28,
           display: 'flex',
           alignItems: 'center',

@@ -91,7 +91,7 @@ export default function Checkout() {
           ))}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: 32 }}>
+        <div className="grid-checkout">
 
           {/* ── LEFT ── */}
           <div>

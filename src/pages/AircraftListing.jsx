@@ -108,7 +108,7 @@ export default function AircraftListing() {
 
   return (
     <div style={{ background: '#080808', minHeight: '100vh', paddingTop: 80 }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 40px' }}>
+      <div className="aircraft-listing-inner" style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 40px' }}>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 32 }}>
           <h1 style={{ fontSize: 'clamp(36px,5vw,60px)', fontWeight: 900, color: '#fff', letterSpacing: '-0.03em', marginBottom: 10 }}>Global Fleet</h1>
           <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.4)', maxWidth: 460 }}>Curated excellence in aviation. Explore our comprehensive marketplace of private jets.</p>
@@ -146,7 +146,7 @@ export default function AircraftListing() {
 
         {/* Grid */}
         {loading ? (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 22 }}>
+          <div className="grid-aircraft">
             {Array.from({ length: PER_PAGE }).map((_, i) => <CardSkeleton key={i} />)}
           </div>
         ) : data.products.length === 0 ? (
@@ -159,7 +159,7 @@ export default function AircraftListing() {
             </button>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 22 }}>
+          <div className="grid-aircraft">
             {data.products.map((a, i) => <Card key={a.id} a={a} index={i} />)}
           </div>
         )}

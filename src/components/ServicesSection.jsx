@@ -63,11 +63,7 @@ export default function ServicesSection() {
         </motion.div>
 
         {/* Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-          gap: 16,
-        }}>
+        <div className="grid-2col" style={{ gap: 16 }}>
           {SERVICES.map((svc, i) => (
             <motion.div
               key={svc.title}

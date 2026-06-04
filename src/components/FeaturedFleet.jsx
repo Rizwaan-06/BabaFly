@@ -226,11 +226,7 @@ export default function FeaturedFleet() {
         </motion.div>
 
         {/* Cards Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: 24,
-        }}>
+        <div className="grid-3col">
           {FLEET.map((aircraft, i) => (
             <AircraftCard key={aircraft.id} aircraft={aircraft} index={i} />
           ))}
