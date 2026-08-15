@@ -176,15 +176,14 @@ To deploy your own instance:
 
 ## 📸 Screenshots
 
-> _(Add screenshots of your app pages here)_
-
 | Page               | Preview |
 |--------------------|---------|
-| Home               | _screenshot_ |
-| Aircraft Listing   | _screenshot_ |
-| Aircraft Details   | _screenshot_ |
-| Checkout           | _screenshot_ |
-| Orders             | _screenshot_ |
+| **Home Page**      | ![Home Page](public/screenshots/home.png) |
+| **Aircraft Listing** | ![Aircraft Listing](public/screenshots/aircraft_listing.png) |
+| **Aircraft Details** | ![Aircraft Details](public/screenshots/aircraft_details.png) |
+| **Checkout**       | ![Checkout](public/screenshots/checkout.png) |
+| **Orders**         | ![Orders](public/screenshots/orders.png) |
+
 
 ---
 
